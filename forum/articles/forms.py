@@ -5,6 +5,7 @@ from articles.models import Article
 #     title = forms.CharField(max_length=100, label='标题')
 #     content = forms.CharField(max_length=10000, label='内容')
 
+#使用与数据模型相关的表单
 class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article

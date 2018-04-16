@@ -19,7 +19,7 @@
     <tbody>
         {% for article in articles %}
         <tr>
-            <td>{{ article.title }}</td>
+            <td><a href="/article/detail/{{ article.id }}">{{ article.title }}</a> </td>
             <td>{{ article.author }}</td>
             <td>{{ article.create_timestamp|date:"Y-m-d P" }}</td>
             <td>{{ article.last_update_timestamp|date:"Y-m-d P" }}</td>
@@ -27,4 +27,36 @@
         {% endfor %}
     </tbody>
 </table>
+<nav>
+    <ul class="pagination">
+
+        {% if has_previous  %}
+            <li>
+                <a href="?page_no=1">首页</a>
+            </li>
+            <li>
+                <a href="?page_no={{ previous_link }}">&laquo;</a>
+            </li>
+        {% endif %}
+        {% for lnk in page_links %}
+            {% if lnk == current_no %}
+                <li class="active">
+                    <a href="?page_no={{ lnk }}">{{ lnk }}</a>
+                </li>
+            {% else %}
+                <li>
+                    <a href="?page_no={{ lnk }}">{{ lnk }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+        {% if has_next %}
+            <li>
+                <a href="?page_no={{ next_link }}">&raquo;</a>
+            </li>
+            <li>
+                <a href="?page_no={{ pages_cnt }}">尾页</a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>
 {% endblock %}
