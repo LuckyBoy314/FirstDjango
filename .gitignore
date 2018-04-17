@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+#保密设置
+forum/private_settings.py
+
 #pyCharm
 .idea/
 
