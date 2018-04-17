@@ -20,5 +20,6 @@ from blocks import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index),
-    url(r'^article/', include('articles.urls'))
+    url(r'^article/', include('articles.urls')),
+    url(r'^user/', include('user_sys.urls'))
 ]

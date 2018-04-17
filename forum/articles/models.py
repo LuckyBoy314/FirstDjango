@@ -1,11 +1,11 @@
 from django.db import models
 from blocks.models import Block
-
+from django.contrib.auth.models import User
 
 class Article(models.Model):
     block = models.ForeignKey(Block, verbose_name='板块ID')
+    author = models.ForeignKey(User, verbose_name='作者')
     title = models.CharField('文章标题', max_length=100)
-    author = models.CharField('作者', max_length=100, default='能豆子')
     content = models.CharField('文章内容', max_length=10000)
     status = models.IntegerField('状态', choices=((0, '正常'), (-1, '删除')))
 
