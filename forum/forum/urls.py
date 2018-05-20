@@ -21,5 +21,11 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index),
     url(r'^article/', include('articles.urls')),
-    url(r'^user/', include('user_sys.urls'))
+    url(r'^accounts/', include('user_sys.urls')),
+
+    # 登录登出 accounts/login
+    # 密码重置
+    # 修改密码
+    url(r'^accounts/', include('django.contrib.auth.urls')),
+
 ]
