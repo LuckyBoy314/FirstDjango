@@ -6,6 +6,12 @@
     <li class="active">发表文章</li>
   </ol>
 
+  {% for field in form %}
+      {% for error in field.errors %}
+          <div class="alert alert-danger">{{ field.label }}: {{ error }}</div>
+      {% endfor %}
+  {% endfor %}
+
   <form class="form-horizontal" action="{% url 'create_article' b.id %}" method="POST"> {% csrf_token %}
     <div class="form-group">
       <label for="article_title" class="col-sm-1 control-label">标题</label>
