@@ -6,13 +6,12 @@
 
 {% block breadcrumb %}
   <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
-  <li class="breadcrumb-item">{{ board.name }}</li>
+  <li class="breadcrumb-item"><a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a></li>
   <li class="breadcrumb-item active">New topic</li>
 {% endblock %}
 
 {% block content %}
-  <form method="post">
-    {% csrf_token %}
+  <form method="post">{% csrf_token %}
     <div class="form-group">
       <label for="id_subject">Subject</label>
       <input type="text" class="form-control" id="id_subject" name="subject">
