@@ -4,8 +4,7 @@ __pycache__/
 *$py.class
 
 #保密设置
-forum2/forum2/private_settings.py
-forum/forum/private_settings.py
+forum/private_settings.py
 
 #pyCharm
 .idea/

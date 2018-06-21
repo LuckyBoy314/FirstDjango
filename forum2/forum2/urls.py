@@ -21,5 +21,14 @@ from .views import index
 urlpatterns = [
     url(r'^$', index, name='index'),
     url(r'^article/', include('article.urls')),#, namespace='article')),
+    url(r'^accounts/', include('accounts.urls')),
+
+    # 登录 login
+    # 登出 logout
+    # 修改密码
+    # 重置密码
+    url(r'^accounts/', include('django.contrib.auth.urls')),
+
     url(r'^admin/', admin.site.urls),
+
 ]

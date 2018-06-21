@@ -6,6 +6,7 @@ from .forms import ArticleForm
 from django.views.generic import View
 from django.views.generic import DetailView
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 
 # def article_list(request, block_id):
 #     block = Block.objects.get(id=block_id)
@@ -54,6 +55,7 @@ def article_list(request, block_id):
 
 
 # 基于函数的创建文章方法
+@login_required
 def create_article(request, block_id):
     """
     使用表单创建数据
@@ -91,6 +93,7 @@ def create_article(request, block_id):
             article = form.save(commit=False)  # form表单是与Article数据模型直接关联的，所有可直接利用form实例进行创建数据
             article.block = block
             article.status = 0
+            article.owner = request.user
             article.save()
             # return redirect(reverse('article_list', args=(block_id,))) # redirect可以直接操作url
             return redirect('article_list', block_id=block_id)
@@ -116,6 +119,7 @@ class CreateArticle(View):
             article = form.save(commit=False)
             article.block = self.block
             article.status = 0
+            article.owner = request.user
             article.save()
             # return redirect(reverse('article_list', args=(block_id,)))
             return redirect('article_list', block_id=block_id)
