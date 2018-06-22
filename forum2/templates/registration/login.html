@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <!--错误处理-->
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endfor %}
+    {% endif %}
+
+    {% if form.username.errors %}
+        {% for error in form.username.errors %}
+            <div class="alert alert-danger">用户名：{{ error }}</div>
+        {% endfor %}
+    {% endif %}
+
+    {% if form.password.errors %}
+        {% for error in form.password.errors %}
+            <div class="alert alert-danger">密码：{{ error }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <!--表单部分-->
+    <form class="form-horizontal" action="/accounts/login/" method="POST"> {% csrf_token %}
+
+        <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">用户名</span>
+              <input type="text" name="username" class="form-control" placeholder="请输入用户名" aria-describedby="basic-addon1" />
+            </div>
+        </div>
+        <div class="form-group">
+           <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">密码</span>
+              <input type="password" name="password" class="form-control" placeholder="请输入密码" aria-describedby="basic-addon1" />
+           </div>
+        </div>
+        <input type="hidden" name="next" value="{{ next }}"/>  <!-- GET的时候如果路径后还有next参数，登录处理函数GET会将其传回给表单，表单提交的时候会再发送给登录处理函数POST -->
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">登录</button>
+        </div>
+
+    </form>
+
+{% endblock %}
