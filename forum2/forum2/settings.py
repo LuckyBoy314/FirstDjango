@@ -108,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-#LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
 # 使用中文作为后台语言
 LANGUAGE_CODE = 'zh-hans'
 
@@ -132,4 +132,6 @@ STATICFILES_DIRS = (
 )
 
 # 登录后重定向url
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'index'
+# 登出重定向url
+LOGOUT_REDIRECT_URL = 'index'

@@ -9,18 +9,19 @@ from django.contrib.auth.models import User
 
 
 class Register(View):
-    template_name = 'register.html'
+    template_name = 'registration/register.html'
 
     def get(self, request):
         return render(request, self.template_name)
+
     def post(self, request):
 
-        #form = UserForm(request.POST)
-        #if form.is_valid():
-            #user = form.save(commit=False)
-        username = request.POST['username']
-        password = request.POST['password']
-        email = request.POST['email']
+        # form = UserForm(request.POST)
+        # if form.is_valid():
+            # user = form.save(commit=False)
+        username = request.POST['username'].strip()
+        password = request.POST['password'].strip()
+        email = request.POST['email'].strip()
         user = User.objects.create_user(username, email, password)
         user.is_active = False  # 要将激活状态改为False
         user.save()
@@ -33,7 +34,7 @@ class Register(View):
 
         send_mail(subject='message',
                   message='It is a message %s' % activate_link,
-                  #html_message='''点击<a href="%s">这里</a>激活''' % activate_link,
+                  # html_message='''点击<a href="%s">这里</a>激活''' % activate_link,
                   from_email='xxmeteobservatory@163.com',
                   recipient_list=[user.email],
                   fail_silently=False
@@ -41,6 +42,7 @@ class Register(View):
         return render(request, 'registration/register_success.html')
         #else:
         #    return render(request, self.template_name, {'form': form})
+
 
 def activate(request, activate_key):
     if ActivateValidation.objects.filter(activate_key=activate_key).exists():
