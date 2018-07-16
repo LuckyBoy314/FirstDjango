@@ -13,7 +13,7 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
-
     class Meta:
         verbose_name = '文章'
         verbose_name_plural = '文章'
+

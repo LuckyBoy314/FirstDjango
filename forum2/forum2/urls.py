@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^$', index, name='index'),
     url(r'^article/', include('article.urls')),#, namespace='article')),
     url(r'^accounts/', include('accounts.urls')),
+    url(r'^comment/', include('comment.urls')),
 
     # 登录 login
     # 登出 logout
