@@ -4,6 +4,8 @@ from article.models import Article
 
 
 class Comment(models.Model):
+    to_comment = models.ForeignKey('self', blank=True, null=True, verbose_name='被回复评论')
+
     owner = models.ForeignKey(User, verbose_name='作者')
     article = models.ForeignKey(Article, verbose_name='所属文章')
     content = models.TextField('评论内容', max_length=10000)
