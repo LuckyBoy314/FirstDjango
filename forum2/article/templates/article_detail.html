@@ -24,8 +24,19 @@
             作者: {{ comment.owner.username }}
           </td>
           <td>
+            {% if comment.to_comment %}
+              <blockquote>
+                <b>{{ comment.to_comment.owner.username }}:</b>
+                <br />
+                {{ comment.to_comment.content|linebreaksbr }}
+              </blockquote>
+
+            {% endif %}
             <!--数据库中的换行符是\n,而html中换行复为<br/>要将\n转换成<br/>需要使用'linebreaksbr'过滤器-->
             {{ comment.content|linebreaksbr }}
+            <a href="#replyRegion" data-id="{{ comment.id }}" class="replyBtn btn btn-primary pull-right">
+              回复
+            </a>
           </td>
         </tr>
       {% endfor %}
@@ -75,10 +86,17 @@
       $(document).ready(function () {
           let article_id = {{ a.id }};
           let page_cnt = {{ pagination_data.pages_cnt }};
+          let to_comment_id = 0;
+
+          $(".replyBtn").click(function (e){
+              to_comment_id = parseInt($(e.target).attr('data-id'));
+              $("#commentContent").focus();
+              return false;
+          });
 
           $("#commentBtn").click(function () {
               let comment = $("#commentContent").val();
-              let param = {"article_id": article_id, "content": comment};
+              let param = {"article_id": article_id, "content": comment, 'to_comment_id': to_comment_id};
 
               /* 向服务器提交数据，除了使用form表单，还可以使用js提交，js请求相关称为AJAX
                 直接使用JQuery的post方法
