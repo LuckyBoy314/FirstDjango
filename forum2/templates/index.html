@@ -16,7 +16,7 @@
   <div class="col-xs-12 col-md-2">
     {% if user.is_authenticated %}
         <div class="well">
-            {{ user.username }} 欢迎光临论坛.<br />
+            {{ user.username }} 欢迎光临论坛.<span class="badge"> {{ msg_cnt }}</span><br />
             <a href="/accounts/logout/">登出</a>
             <a href="/accounts/password_change/">修改密码</a>
         </div>

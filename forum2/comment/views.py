@@ -4,7 +4,7 @@ from article.models import Article
 import json
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-
+from message.models import Message
 
 def json_response(obj):
     txt = json.dumps(obj)
@@ -24,9 +24,17 @@ def create_comment(request):
 
     if to_comment_id!= 0:
         to_comment = Comment.objects.get(id=to_comment_id)
+        message_owner = to_comment.owner
+        message_content = '有人回复了你的评论'
     else:
         to_comment = None
+        message_owner = article.owner
+        message_content = '有人回复了你的文章:'+ article.title
 
     comment = Comment(to_comment=to_comment, article=article, owner=request.user, content=content)
     comment.save()
+
+    message = Message(owner=message_owner, content=message_content, status=0)
+    message.save()
+
     return json_response({"status": "ok", "msg": ""})

@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'block',
     'article',
     'accounts',
-    'comment'
+    'comment',
+    'message'
 ]
 
 MIDDLEWARE = [
