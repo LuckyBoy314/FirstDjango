@@ -5,7 +5,7 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <a href="{% url 'article_list' b.id %}" style="font-size: 16px">{{ b.name }}</a>
-          <span class="pull-right">{{ b.manager}}</span>
+          <span class="pull-right">{{ b.manager }}</span>
         </div>
         <div class="panel-body">
           {{ b.desc }}
@@ -15,15 +15,18 @@
   </div>
   <div class="col-xs-12 col-md-2">
     {% if user.is_authenticated %}
-        <div class="well">
-            {{ user.username }} 欢迎光临论坛.<span class="badge"> {{ msg_cnt }}</span><br />
-            <a href="/accounts/logout/">登出</a>
-            <a href="/accounts/password_change/">修改密码</a>
-        </div>
+      <div class="well">
+        {{ user.username }} 欢迎光临论坛.
+        {% if msg_cnt %}
+          <a href="{% url 'message_list' %}"><span class="badge">{{ msg_cnt }}</span></a>
+        {% endif %}
+        <a href="/accounts/logout/">登出</a>
+        <a href="/accounts/password_change/">修改密码</a>
+      </div>
     {% else %}
-        <div class="well"><a href="/accounts/login/">请登录</a></div>
-        <div class="well"><a href="/accounts/password_reset/">忘记密码</a></div>
-        <div class="well"><a href="/accounts/register">注册</a> </div>
+      <div class="well"><a href="/accounts/login/">请登录</a></div>
+      <div class="well"><a href="/accounts/password_reset/">忘记密码</a></div>
+      <div class="well"><a href="/accounts/register">注册</a></div>
     {% endif %}
-</div>
+  </div>
 {% endblock %}

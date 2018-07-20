@@ -115,7 +115,7 @@
                   let ret = JSON.parse(data);
                   if (ret["status"] === "ok") {
                       $("#commentContent").val("");
-                      window.location.href = "/article/details/{{ a.id }}?page_no=" + page_cnt;
+                      window.location.href = "/article/details/{{ a.id }}?page_no=" + (page_cnt + 1);
                   }
                   else {
                       alert(ret["msg"]);

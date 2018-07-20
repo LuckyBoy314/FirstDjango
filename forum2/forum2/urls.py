@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^article/', include('article.urls')),#, namespace='article')),
     url(r'^accounts/', include('accounts.urls')),
     url(r'^comment/', include('comment.urls')),
+    url(r'^message/', include('message.urls')),
 
     # 登录 login
     # 登出 logout
