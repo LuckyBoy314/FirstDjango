@@ -13,6 +13,10 @@ def index(request):
     # 然后添加数据
     # 查询获取数据 类名.object.查询函数
     blocks_info = Block.objects.filter(status=0).order_by('id')
-    msg_cnt = Message.objects.filter(status=0).count() # 未读信息数目
+
+    if request.user.is_authenticated():
+        msg_cnt = Message.objects.filter(status=0, owner=request.user).count() # 未读信息数目
+    else:
+        msg_cnt = 0
 
     return render(request, 'index.html', {'blocks': blocks_info, 'msg_cnt': msg_cnt})

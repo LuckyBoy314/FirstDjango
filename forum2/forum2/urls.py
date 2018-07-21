@@ -34,3 +34,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
 ]
+
+# 禁掉后台管理中的真实删除按钮
+admin.site.disable_action('delete_selected')

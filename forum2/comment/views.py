@@ -32,6 +32,7 @@ def create_comment(request):
         message_owner = article.owner
         message_content = "有人评论了您的文章: 《%s》" % article.title
 
+    # todo 如何定位到具体页码 需要进一步细化
     link="http://%s/article/details/%s" % (request.get_host(), article.id)
 
     comment = Comment(to_comment=to_comment, article=article, owner=request.user, content=content)
