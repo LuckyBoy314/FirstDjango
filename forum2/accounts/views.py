@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import View
 from django.http import HttpResponse
 #from  .forms import UserForm
@@ -6,7 +6,8 @@ import uuid
 from django.core.mail import send_mail
 from .models import ActivateValidation
 from django.contrib.auth.models import User
-
+from django.contrib.auth.decorators import login_required
+import os
 
 class Register(View):
     template_name = 'registration/register.html'
@@ -53,3 +54,28 @@ def activate(request, activate_key):
         return HttpResponse('<h2>激活成功!</h2>')
     else:
         return HttpResponse('<h2>激活失败!</h2>')
+
+@login_required
+def upload_avatar(request):
+    if request.method == 'GET':
+        return render(request, 'upload_avatar.html')
+    else:
+        # 从POST请求中获取上传的文件，上传文件类似于字典，通过键名获取，键名即input属性中的name属性值
+        # 获取的文件被Django封装成类似Python文件的对象
+        avatar_file = request.FILES.get('avatar', None)
+
+        BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        upload_file_name = str(request.user.id) + '_' + avatar_file.name
+        file_path = os.path.join(BASE_DIR, 'static', 'avatar', upload_file_name)
+
+        with open(file_path, 'wb+') as destination:
+            for chunk in avatar_file.chunks(): # 分段写入
+                destination.write(chunk)
+
+        url = 'http://' +  os.path.join('127.0.0.1', 'avatar', upload_file_name)
+        print(url)
+        profile = request.user.userprofile
+        profile.avatar = url
+        profile.save()
+
+        return redirect('/')

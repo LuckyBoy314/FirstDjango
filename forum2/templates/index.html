@@ -20,6 +20,14 @@
         {% if msg_cnt %}
           <a href="{% url 'message_list' %}"><span class="badge">{{ msg_cnt }}</span></a>
         {% endif %}
+        <br />
+        {% if user.userprofile.avatar %}
+          <img src="{{ user.userprofile.avatar }}" style="width: 100%; height: 150px" alt="头像没有加载成功" />
+        {% else %}
+          <a href="{% url 'upload_avatar' %}">还有头像，赶快上传！</a>
+          <br />
+        {% endif %}
+
         <a href="/accounts/logout/">登出</a>
         <a href="/accounts/password_change/">修改密码</a>
       </div>
