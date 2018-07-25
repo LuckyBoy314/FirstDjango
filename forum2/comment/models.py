@@ -14,7 +14,8 @@ class Comment(models.Model):
     last_update_timestamp = models.DateTimeField('最后更新时间', auto_now=True)
 
     def __str__(self):
-        return self.owner
+        return self.content
+
     class Meta:
         verbose_name = '评论'
         verbose_name_plural = '评论'

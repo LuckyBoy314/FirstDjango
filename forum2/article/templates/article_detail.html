@@ -88,6 +88,11 @@
           let page_cnt = {{ pagination_data.pages_cnt }};
           let to_comment_id = 0;
 
+          /*
+          可以为一类元素绑定事件回调函数，e.target是具体响应事件的元素
+          单击一个元素会使得这个元素默认获得焦点
+          为了阻断默认获得焦点的行为，需要在回调函数中return false
+          */
           $(".replyBtn").click(function (e){
               to_comment_id = parseInt($(e.target).attr('data-id'));
               $("#commentContent").focus();
@@ -110,7 +115,7 @@
                   let ret = JSON.parse(data);
                   if (ret["status"] === "ok") {
                       $("#commentContent").val("");
-                      window.location.href = "/article/details/{{ a.id }}?page_no=" + page_cnt;
+                      window.location.href = "/article/details/{{ a.id }}?page_no=" + (page_cnt + 1);
                   }
                   else {
                       alert(ret["msg"]);

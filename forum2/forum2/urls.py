@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^article/', include('article.urls')),#, namespace='article')),
     url(r'^accounts/', include('accounts.urls')),
     url(r'^comment/', include('comment.urls')),
+    url(r'^message/', include('message.urls')),
 
     # 登录 login
     # 登出 logout
@@ -33,3 +34,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
 ]
+
+# 禁掉后台管理中的真实删除按钮
+admin.site.disable_action('delete_selected')
