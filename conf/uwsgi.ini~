@@ -1,0 +1,13 @@
+[uwsgi]
+uid = webroot
+gid = webroot
+autoload = true
+socket = 0.0.0.0:8200
+stats = 127.0.0.1:8201
+chdir = /home/webroot/CodingSpace/FirstDjango/forum/
+logto = /home/webroot/CodingSpace/FirstDjango/uwsgi.log
+module = forum2.wsgi:application
+processes = 4 
+maseter = true
+no-orphans = true
+pidfile = /home/webroot/CodingSpace/FirstDjango/wsgi.pi

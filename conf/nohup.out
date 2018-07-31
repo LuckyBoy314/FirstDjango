@@ -1,0 +1,13 @@
+pyenv: uwsgi: command not found
+
+The `uwsgi' command exists in these Python versions:
+  3.6.5/envs/Django1.10_py3.6.5
+  Django1.10_py3.6.5
+
+pyenv: uwsgi: command not found
+
+The `uwsgi' command exists in these Python versions:
+  3.6.5/envs/Django1.10_py3.6.5
+  Django1.10_py3.6.5
+
+[uWSGI] getting INI configuration from uwsgi.ini

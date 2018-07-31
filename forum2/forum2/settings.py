@@ -24,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'w6wy-tidzj)sa&85m$m2r-*gmj!aa(y-#nrac0qlyg8uit&bo9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', '172.18.168.111', '10.0.2.15']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '10.0.2.15']
 
 
 # Application definition
@@ -127,11 +127,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_URL = '/static/'
-# 用引用静态文件，必须添加以下代码
+# 该参数是总的静态文件引用根目录，在模板中可以使用{% static %}进行引用
+# 当DEBUG=True时， 可以设置为'/static/，在模板中使用静态文件的时候，可以用'/static/'表示
+STATIC_URL = 'http://10.0.2.15/media/'
+
+# 其他存放静态文件的具体目录，默认会从各个app下的static目录中找
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+# 收集静态文件时指定的目录
+STATIC_ROOT = os.path.join(BASE_DIR, 'dist_static')
 
 # 登录后重定向url
 LOGIN_REDIRECT_URL = 'index'

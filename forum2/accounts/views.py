@@ -8,6 +8,8 @@ from .models import ActivateValidation
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 import os
+from forum2.settings import STATIC_URL
+
 
 class Register(View):
     template_name = 'registration/register.html'
@@ -66,14 +68,14 @@ def upload_avatar(request):
 
         BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         upload_file_name = str(request.user.id) + '_' + avatar_file.name
-        file_path = os.path.join(BASE_DIR, 'static', 'avatar', upload_file_name)
+        file_path = os.path.join(BASE_DIR, 'dist_static', 'avatar', upload_file_name)
 
         with open(file_path, 'wb+') as destination:
             for chunk in avatar_file.chunks(): # 分段写入
                 destination.write(chunk)
 
-        url = 'http://' +  os.path.join('127.0.0.1', 'avatar', upload_file_name)
-        print(url)
+        url = os.path.join(STATIC_URL, 'avatar', upload_file_name)
+
         profile = request.user.userprofile
         profile.avatar = url
         profile.save()
